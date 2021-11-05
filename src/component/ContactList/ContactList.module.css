@@ -1,10 +1,50 @@
 .list {
-  width: 450px;
-  display: inline-block;
+  margin-top: 20px;
 }
 
 .listItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.listItem:not(:last-child) {
+  margin-bottom: 25px;
+}
+.text {
+  align-self: center;
+  /* width: 120px; */
+  font-size: 15px;
+}
+.contact {
+  font-size: 18px;
+}
+
+.text:first-child {
+  font-weight: 500;
+}
+
+/*button*/
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0px;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+  background-color: #0f4581;
+  transition: box-shadow 250ms linear;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #081a29;
+}
+.icon {
+  fill: white;
 }
