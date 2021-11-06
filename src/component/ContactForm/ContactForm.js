@@ -8,7 +8,7 @@ function ContactForm({ toggleModall }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state => state.contacts.items);
+  const contactsAll = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
 
   const add = (name, number) => dispatch(addContact(name, number));
@@ -30,7 +30,7 @@ function ContactForm({ toggleModall }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const contactСomparison = contacts.find(
+    const contactСomparison = contactsAll.find(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
 
@@ -38,10 +38,10 @@ function ContactForm({ toggleModall }) {
       alert(`${name} is already in contacts`);
     } else {
       add(name, number);
-      setName('');
-      setNumber('');
-      toggleModall();
     }
+    setName('');
+    setNumber('');
+    toggleModall();
   };
 
   return (

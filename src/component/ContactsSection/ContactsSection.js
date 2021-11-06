@@ -4,14 +4,16 @@ import ContactList from '../ContactList/ContactList';
 import Button from '../Button/Button';
 import { PlusCircleFill } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
+
 export default function ContactsSection({ toggleModall }) {
-  const contacts = useSelector(state => state.contacts.items);
+  const contactsAll = useSelector(state => state.contacts.items);
   const filterValue = useSelector(state => state.contacts.filter);
+  console.log(contactsAll);
 
   const filterContacts = () => {
     const normalizedFilter = filterValue.toLowerCase();
 
-    return contacts.filter(contact =>
+    return contactsAll.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
   };
@@ -22,15 +24,15 @@ export default function ContactsSection({ toggleModall }) {
       <Button className={s.button} type="button" onClick={toggleModall}>
         <PlusCircleFill width="40" height="40" className={s.icon} />
       </Button>
-      {contacts.length > 1 && <ContactFilter />}
-      {contacts.length > 0 ? (
+      {contactsAll.length > 1 && <ContactFilter />}
+      {visibleContacts.length > 0 ? (
         <ContactList />
       ) : (
         <p className={s.text}>
-          {' '}
-          Contact list is empty. Add your first contact to the list.{' '}
+          Contact list is empty. Add your first contact to the list.
         </p>
       )}
+
       {visibleContacts < 1 && filterValue !== '' && (
         <p className={s.text}>
           There is no contact with the name "{filterValue}" in the list

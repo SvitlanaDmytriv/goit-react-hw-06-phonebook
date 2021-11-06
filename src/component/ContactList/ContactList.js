@@ -8,7 +8,7 @@ import { deleteContact } from '../../redux/contacts/contactsAction';
 
 function ContactList() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+  const contactsAll = useSelector(state => state.contacts.items);
   const value = useSelector(state => state.contacts.filter);
 
   const deleteItem = id => dispatch(deleteContact(id));
@@ -16,7 +16,7 @@ function ContactList() {
   const filterContacts = () => {
     const normalizedFilter = value.toLowerCase();
 
-    return contacts.filter(contact =>
+    return contactsAll.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
   };
@@ -29,7 +29,11 @@ function ContactList() {
         <li key={id} className={s.listItem}>
           <span className={s.contact}>{name} :</span>
           <span className={s.contact}>{number}</span>
-          <Button className={s.button} type="submit" onClick={deleteItem(id)}>
+          <Button
+            className={s.button}
+            type="button"
+            onClick={() => deleteItem(id)}
+          >
             <PersonXFill width="20" height="30" className={s.icon} />
           </Button>
         </li>
