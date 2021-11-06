@@ -1,10 +1,17 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contacts/contactsAction';
 import Button from '../Button/Button';
 import s from './ContactForm.module.css';
 
-function ContactForm({ addContact, toggleModall }) {
+function ContactForm({ toggleModall }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
+
+  const add = (name, number) => dispatch(addContact(name, number));
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -23,10 +30,18 @@ function ContactForm({ addContact, toggleModall }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    addContact({ name, number });
-    setName('');
-    setNumber('');
-    toggleModall();
+    const contactСomparison = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase(),
+    );
+
+    if (contactСomparison) {
+      alert(`${name} is already in contacts`);
+    } else {
+      add(name, number);
+      setName('');
+      setNumber('');
+      toggleModall();
+    }
   };
 
   return (

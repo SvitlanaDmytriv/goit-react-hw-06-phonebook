@@ -3,18 +3,33 @@ import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 import Button from '../Button/Button';
 
-function ContactList({ contactsList, deleteContact }) {
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from '../../redux/contacts/contactsAction';
+
+function ContactList() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
+  const value = useSelector(state => state.contacts.filter);
+
+  const deleteItem = id => dispatch(deleteContact(id));
+
+  const filterContacts = () => {
+    const normalizedFilter = value.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+  };
+
+  const visibleContacts = filterContacts();
+
   return (
     <ul className={s.list}>
-      {contactsList.map(({ name, number, id }) => (
+      {visibleContacts.map(({ name, number, id }) => (
         <li key={id} className={s.listItem}>
           <span className={s.contact}>{name} :</span>
           <span className={s.contact}>{number}</span>
-          <Button
-            className={s.button}
-            type="submit"
-            onClick={() => deleteContact(id)}
-          >
+          <Button className={s.button} type="submit" onClick={deleteItem(id)}>
             <PersonXFill width="20" height="30" className={s.icon} />
           </Button>
         </li>
