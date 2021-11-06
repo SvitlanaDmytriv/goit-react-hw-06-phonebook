@@ -1,7 +1,7 @@
 .container {
   position: relative;
   width: 400px;
-  padding: 10px;
+  padding: 12px;
   margin-right: auto;
   margin-left: auto;
   background: rgba(255, 255, 255, 0.507);
@@ -34,10 +34,10 @@
 }
 
 .icon {
-  fill: #0f4581;
+  fill: #102e4f;
 }
 
 .icon:hover,
 .icon:focus {
-  fill: #081a29;
+  fill: #2074b9;
 }

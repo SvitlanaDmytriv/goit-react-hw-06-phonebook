@@ -12,13 +12,16 @@
 }
 .text {
   align-self: center;
-  /* width: 120px; */
   font-size: 15px;
 }
 .contact {
   font-size: 18px;
 }
-
+.contactItem {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+}
 .text:first-child {
   font-weight: 500;
 }
@@ -37,7 +40,7 @@
   border-radius: 50%;
 
   cursor: pointer;
-  background-color: #0f4581;
+  background-color: #6c80978a;
   transition: box-shadow 250ms linear;
 }
 
